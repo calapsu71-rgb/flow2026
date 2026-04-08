@@ -13,3 +13,7 @@ export function estadoSistema() {
         message: "Sistema Vitonco funcionando correctamente"
     };
 }
+
+export function sumar(a, b) {
+  return a + b;
+}
