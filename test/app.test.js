@@ -1,4 +1,4 @@
-import { saludar, despedir, estadoSistema, sumar } from "../src/app.js"
+import { saludar, despedir, estadoSistema, sumar, healtCheck } from "../src/app.js"
 
 function ejecutarPruebas() {
     let pasadas = 0;
@@ -30,6 +30,15 @@ function ejecutarPruebas() {
         pasadas++;
     } else {
         console.log("Test 3 fallido: ", suma);
+        fallidas++;
+    }
+
+    const healt = healtCheck();
+    if(healt.status === 'ok'){
+        console.log('Test healtCheck pasado');
+        pasadas++;
+    }else{
+        console.log('Test healtCheck fallido', healt);
         fallidas++;
     }
 }
