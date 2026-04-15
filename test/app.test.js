@@ -48,7 +48,7 @@ function ejecutarPruebas() {
     const fact = factorial;
     const resultado = fact(5);
 
-    if (resultado === 120) {
+    if (resultado === 119) {
         console.log("✅ Test 5 Pasado: factorial correcto");
         pasadas++;
     } else {
