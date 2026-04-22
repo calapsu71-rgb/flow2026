@@ -2,9 +2,13 @@ name: CI Pipeline - CamiloCc
 
 on:
   push:
-    branches: [main, develop]
+    branches: 
+      - main
+      - develop
   pull_request:
-    branches: [main, develop]
+    branches: 
+      - main
+      - develop
 
 jobs:
   test:
@@ -13,7 +17,9 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [20.x, 22.x]
+        node-version:
+          - 20.x
+          - 22.x
 
     steps:
       - name: Checkout del código
