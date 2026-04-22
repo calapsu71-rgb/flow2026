@@ -1,0 +1,31 @@
+name: Deploy - Camilo despliegue
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: desplegar produccion
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Instalar y probar
+        run: |
+          npm install
+          npm test
+
+      - name: Desplegar aplicación
+        run: |
+          echo "Iniciando despliegue de aplicacion camilo v$(node -p "require('./package.json').version")"
+          echo "sistema desplegado correctamente"
+          echo "url: https//streamflow.example.com"
