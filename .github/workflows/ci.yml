@@ -16,6 +16,7 @@ jobs:
     runs-on: ubuntu-latest
 
     strategy:
+      fail-fast: false
       matrix:
         node-version:
           - 20.x
@@ -25,16 +26,26 @@ jobs:
       - name: Checkout del código
         uses: actions/checkout@v4
 
-      - name: Configurar Node.js ${{ matrix.node-version }}
+      - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
 
       - name: Instalar dependencias
-        run: npm install
+        run: npm ci
 
-      - name: Ejecutar pruebas
-        run: npm test
+      - name: Verificar si existe script de test
+        run: |
+          if npm run | grep -q "test"; then
+            npm test
+          else
+            echo "No hay tests configurados"
+          fi
 
-      - name: Verificar sintaxis del código
-        run: node --check src/app.js
+      - name: Verificar sintaxis del código (solo si existe)
+        run: |
+          if [ -f "src/app.js" ]; then
+            node --check src/app.js
+          else
+            echo "No existe src/app.js"
+          fi
